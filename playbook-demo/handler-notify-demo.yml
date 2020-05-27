@@ -1,0 +1,21 @@
+---
+- hosts: node2
+  remote_user: root
+  
+  tasks:
+  - name: install httpd
+    yum: name=httpd state=present
+  - name: copy config
+    copy: src=files/httpd.conf dest=/etc/httpd/conf/
+    # 监听这个任务，如果任务执行时发生变化则触发name为restart httpd的handler
+    notify: 
+    - restart httpd
+    - ok
+  - name: start service
+    service: name=httpd state=started
+  handlers:
+  - name: restart httpd
+    service: name=httpd state=restarted  
+  - name: ok
+    shell: echo 'ok' > ok.txt
+    

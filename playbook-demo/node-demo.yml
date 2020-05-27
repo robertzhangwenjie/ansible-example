@@ -1,0 +1,30 @@
+---
+# 定义主机组
+- hosts: node2
+  # 定义远程操作用户
+  remote_user: root
+  
+  # 定义任务列表
+  tasks:
+  # 创建文件
+  - name: create new file
+    file: path=/tmp/newfile state=touch
+  # 创建用户
+  - name: create new user
+    user: name=ansibletest system=yes password=ansibletest shell=/sbin/nologin home=/home/ansibletest comment="ansible test user"
+  # 复制文件
+  - name: copy file
+    copy: src=/root/id_rsa.pub dest=/tmp/
+  # 安装package
+  - name: install httpd
+    yum: name=httpd state=latest
+  # 启动httpd服务
+  - name: start httpd
+    service: name=httpd state=started
+  # 脚本失败不退出
+  - name: exit code 0 when failed
+    shell: /usr/bin/useraddaa root || /bin/true
+  # 忽略错误信息
+  - name: run this command and ignore fail error
+    shell: /usr/bin/errortest
+    ignore_errors: True
