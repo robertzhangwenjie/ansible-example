@@ -1,0 +1,13 @@
+{% for host in hosts %}
+
+server {
+   server_name {{host.name}};
+   listen {{host.port}};   
+
+   location / {
+      root html;
+      index index.html;
+   }
+}
+
+{% endfor %}

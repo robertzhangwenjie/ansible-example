@@ -1,0 +1,6 @@
+- import_tasks: group.yml
+- import_tasks: user.yml
+- import_tasks: yum.yml
+- import_tasks: template.yml
+- import_tasks: service.yml
+

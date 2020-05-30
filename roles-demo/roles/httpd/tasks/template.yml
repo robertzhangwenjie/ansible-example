@@ -1,0 +1,3 @@
+- name: copy template
+  template: src=httpd.conf.j2 dest=/tmp/httpd.conf
+  notify: restart httpd

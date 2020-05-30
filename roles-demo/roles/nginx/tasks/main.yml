@@ -1,0 +1,7 @@
+- include: group.yml
+- include: user.yml
+- include: yum.yml
+- include: template.yml
+- include: service.yml
+- include_tasks: roles/httpd/tasks/copyfile.yml
+

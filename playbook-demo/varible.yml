@@ -1,0 +1,19 @@
+---
+- hosts: node2
+  remote_user: root
+  
+  # 定义变量
+  vars:
+  - pkgname: sysstat
+  - svcname: httpd
+  tasks:
+  - name: install httpd
+    yum: name={{ pkgname }} state=present
+  - name: install sysstat
+    yum: name={{svcname}}
+  - name: copy config
+    service: name={{ pkgname }} state=started
+  - name: print hostname
+    # 使用主机变量
+    shell: echo {{ansible_hostname}} > hostname.txt  
+

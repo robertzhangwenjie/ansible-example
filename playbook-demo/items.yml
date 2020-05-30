@@ -1,0 +1,27 @@
+---
+- hosts: node2
+  remote_user: root
+  
+  tasks:
+  - name: create list files
+    with_items: 
+    - file1
+    - file2
+    - file3
+    file: name=/tmp/{{ item }} state=touch
+
+  - name: create groups
+    with_items:
+    - group1
+    - group2
+    - group3
+    group: name={{item}}
+  - name: create users
+    with_items:
+    - name: user1
+      group: group1
+    - name: g2
+      group: group2
+    - name: g3
+      group: group3
+    user: name={{item.name}} group={{item.group}}

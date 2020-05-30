@@ -1,0 +1,2 @@
+- name: copy nginx template
+  template: src=nginx.conf.j2 dest=/tmp/nginx.conf
